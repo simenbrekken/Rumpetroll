@@ -1,5 +1,3 @@
-var http = require('http');
-var fs = require('fs');
 var ws = require('./lib/ws');
 var Tadpole = require('./tadpole').Tadpole;
 
@@ -33,7 +31,6 @@ server.addListener('connection', function(connection) {
 				server.broadcast(JSON.stringify(merge(connection.tadpole, {type: 'update'})));
 				break;
 			case 'message':
-				// TODO: Do db magic
 				var message = data.message.substr(0, 45);
 
 				server.broadcast(JSON.stringify({type: 'message', id: connection.id, message: message}));
